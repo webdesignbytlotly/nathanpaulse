@@ -21,7 +21,7 @@
             background-color: #25c1c8;
         }
         .btn-primary {
-            /* Updated to use accent color background as requested */
+            /* Confirmed: Uses accent color background (#25c1c8) with black text */
             @apply bg-accent text-[#000000] font-bold py-3 px-6 rounded-lg transition duration-300 hover:bg-opacity-80 shadow-lg;
         }
         /* Mobile menu specific styles */
@@ -56,15 +56,6 @@
         .data-reveal.show {
             opacity: 1;
             transform: translateY(0);
-        }
-        .hero-content {
-            /* Ensure content alignment is left on mobile */
-            @apply text-center lg:text-left;
-        }
-        @media (max-width: 767px) {
-            .hero-content {
-                text-align: left;
-            }
         }
     </style>
 </head>
@@ -110,7 +101,7 @@
     </header>
 
     <main>
-        <!-- 1. Hero Section with Video Background -->
+        <!-- 1. Hero Section with Video Background (LEFT ALIGNED CONTENT) -->
         <section class="relative h-[600px] flex items-center overflow-hidden">
             <!-- Background Video -->
             <video autoplay loop muted playsinline class="hero-video">
@@ -121,21 +112,22 @@
             <!-- Transparent Overlay -->
             <div class="absolute inset-0 bg-[#000000] opacity-70 z-10"></div>
             
-            <!-- Hero Content -->
+            <!-- Hero Content Container (Left Aligned) -->
             <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                <div class="lg:w-2/3 xl:w-1/2 hero-content">
+                <!-- Content wrapper is centered but text is LEFT aligned for ALL screen sizes -->
+                <div class="mx-auto max-w-3xl text-left"> 
                     <p class="accent-color text-lg font-medium mb-3 uppercase tracking-widest data-reveal">Mindset & Career Coaching</p>
                     <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-8 data-reveal" style="transition-delay: 100ms;">
                         <span class="block">Develop Your Mind.</span>
                         <span class="block accent-color">Transform Your Career.</span>
                     </h1>
-                    <p class="text-xl mb-12 max-w-lg mx-auto md:mx-0 text-gray-300 data-reveal" style="transition-delay: 200ms;">
+                    <p class="text-xl mb-12 text-gray-300 data-reveal" style="transition-delay: 200ms;">
                         Unlock peak performance, lasting career success, and a powerful mental edge with personalized coaching from Nathan Paulse.
                     </p>
 
-                    <!-- CTAs -->
-                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 data-reveal" style="transition-delay: 300ms;">
-                        <!-- 'Join Mentorship' button uses accent color background -->
+                    <!-- CTAs - Now LEFT aligned using justify-start -->
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-start data-reveal" style="transition-delay: 300ms;">
+                        <!-- 'Join Mentorship' button is the accent color (btn-primary) -->
                         <a href="services.html" class="btn-primary">Join Mentorship</a>
                         <a href="store.html" class="bg-white text-[#000000] font-bold py-3 px-6 rounded-lg transition duration-300 hover:bg-gray-200 shadow-lg border border-white">Download Guides</a>
                     </div>
