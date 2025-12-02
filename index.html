@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Nathan Paulse - Develop Your Mind. Transform Your Career.</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons (for main content) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Load Font Awesome Icons (for footer social links) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Tailwind Configuration for Brand Colors */
+        :root {
+            --color-primary: #25c1c8;
+            --color-black: #000000;
+            --color-white: #ffffff;
+        }
+
+        /* Applying the Inter Font */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Set site background to black */
+            background-color: var(--color-black);
+        }
+
+        /* Custom animation for CTAs */
+        .cta-button {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* CSS Keyframes for Fading Up Effect */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Apply the animation class to the headline */
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out 0.2s forwards; /* 0.2s delay, prevents flash of unstyled content */
+            opacity: 0; /* Start hidden */
+        }
+        
+        /* --- Mobile Slideshow Specific Styles --- */
+        .slideshow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Ensures it stays behind the text */
+            overflow: hidden;
+        }
+        .slideshow-img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        /* Active state for visible image, set to low opacity for background effect */
+        .slideshow-img.active {
+            opacity: 0.3; 
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-primary': 'var(--color-primary)',
+                        'brand-black': 'var(--color-black)',
+                        'brand-white': 'var(--color-white)',
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<!-- Default text color is now white -->
+<body class="text-brand-white antialiased">
+
+    <!-- Header & Navigation -->
+    <!-- Header background is now black -->
+    <header class="sticky top-0 z-50 bg-brand-black shadow-lg shadow-brand-primary/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo/Brand Name - NATHAN PAULSE is now ACCENT COLOR, COACH is white -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-extrabold tracking-tighter">
+                        <span class="text-brand-white">COACH</span> <span class="text-brand-primary">NATHAN PAULSE</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation Links - Text is white -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="about.html" class="text-brand-white hover:text-brand-primary transition duration-150 font-medium">About</a>
+                    <a href="services.html" class="text-brand-white hover:text-brand-primary transition duration-150 font-medium">Services</a>
+                    <a href="store.html" class="text-brand-white hover:text-brand-primary transition duration-150 font-medium">Digital Store</a>
+                    <a href="workshops.html" class="text-brand-white hover:text-brand-primary transition duration-150 font-medium">Workshops</a>
+                    <a href="whatsapp.html" class="text-brand-white hover:text-brand-primary transition duration-150 font-medium">WhatsApp Hub</a>
+                    <a href="blog.html" class="text-brand-white hover:text-brand-primary transition duration-150 font-medium">Insights</a>
+                </nav>
+
+                <!-- Contact CTA (Desktop) -->
+                <div class="hidden md:block">
+                    <!-- CTA remains primary color for contrast -->
+                    <a href="contact.html" class="bg-brand-primary text-brand-black py-2 px-5 rounded-full font-semibold hover:bg-opacity-80 transition duration-150 shadow-lg">
+                        Contact
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button - Icon is white -->
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary" aria-label="Toggle menu">
+                    <i data-lucide="menu" class="w-6 h-6 text-brand-white"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) - Background is black, links are white -->
+        <div id="mobile-menu" class="md:hidden hidden bg-brand-black border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-brand-white hover:bg-gray-800">About</a>
+                <a href="services.html" class="block px-3 py-2 rounded-md text-base font-medium text-brand-white hover:bg-gray-800">Services</a>
+                <a href="store.html" class="block px-3 py-2 rounded-md text-base font-medium text-brand-white hover:bg-gray-800">Digital Store</a>
+                <a href="workshops.html" class="block px-3 py-2 rounded-md text-base font-medium text-brand-white hover:bg-gray-800">Workshops</a>
+                <a href="whatsapp.html" class="block px-3 py-2 rounded-md text-base font-medium text-brand-white hover:bg-gray-800">WhatsApp Hub</a>
+                <a href="blog.html" class="block px-3 py-2 rounded-md text-base font-medium text-brand-white hover:bg-gray-800">Insights</a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium bg-brand-primary text-brand-black text-center">Contact Coach Paulse</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Hero Section - Background is black -->
+        <section class="relative pt-16 pb-24 lg:pt-32 lg:pb-40 overflow-hidden bg-brand-black">
+            
+            <!-- Mobile Slideshow Background (Hidden on medium/desktop and up) -->
+            <div class="slideshow-container md:hidden">
+                <!-- Placeholder Images (Using dark/accent colors for theme) -->
+                <img src="assets/nathan1.jpeg" class="slideshow-img active" data-slide-index="0" alt="Motivational Background Image 1">
+                <img src="assets/nathan2.jpg" class="slideshow-img" data-slide-index="1" alt="Motivational Background Image 2">
+                <img src="assets/nathan3.jpg" class="slideshow-img" data-slide-index="2" alt="Motivational Background Image 3">
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+                    
+                    <!-- Text Content & CTAs -->
+                    <div class="col-span-12 lg:col-span-7">
+                        <span class="inline-block text-sm font-semibold uppercase text-brand-primary tracking-widest mb-3">
+                            Elite Mentorship & Mental Performance
+                        </span>
+                        <!-- H1 text is white, but "Transform Your Career." is accent color and has the fade-in effect -->
+                        <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-8 text-brand-white animate-fade-in-up">
+                            Develop Your Mind. <br> <span class="text-brand-primary">Transform Your Career.</span>
+                        </h1>
+                        <!-- Paragraph text is light gray for contrast -->
+                        <p class="text-xl text-gray-400 mb-12 max-w-lg">
+                            Accelerate your personal and professional growth through simple, practical and highly actionable education for football players, athletes, coaches and sports parents in South Africa.
+                        </p>
+                           
+
+                        <!-- Primary CTAs Row (Simplified) -->
+                        <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                            <!-- CTA 1: JOIN MENTORSHIP (Accent background, Black text) -->
+                            <a href="services.html#mentorship" class="cta-button flex items-center justify-center space-x-2 py-4 px-8 rounded-full bg-brand-primary text-brand-black font-extrabold text-lg hover:bg-opacity-90 transition shadow-xl shadow-brand-primary/30 w-full sm:w-auto">
+                                <i data-lucide="award" class="w-6 h-6"></i>
+                                <span>JOIN MENTORSHIP</span>
+                            </a>
+                            <!-- CTA 2: DOWNLOAD ELITE GUIDES (Transparent background, white border, white text) -->
+                            <a href="store.html" class="cta-button flex items-center justify-center space-x-2 py-4 px-8 rounded-full bg-transparent border border-brand-white text-brand-white font-extrabold text-lg hover:bg-brand-white/10 transition w-full sm:w-auto">
+                                <i data-lucide="book-open-text" class="w-6 h-6"></i>
+                                <span>DOWNLOAD ELITE GUIDES</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Image/Video Placeholder (Hidden on mobile, visible on lg and up) -->
+                    <div class="hidden lg:block col-span-12 lg:col-span-5 mt-16 lg:mt-0 flex justify-center">
+                        <div class="relative w-full max-w-md h-96 md:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+                            <!-- Placeholder for Intro Video or Portrait -->
+                            <!-- UPDATED: Using the specified file path for the header image -->
+                            <img 
+                                src="assets/nathan-header.png" 
+                                alt="Coach Nathan Paulse Header Image" 
+                                class="w-full h-150 object-cover"
+                                onerror="this.src='https://placehold.co/500x700/111827/25c1c8?text=Image+Missing';"
+                            >
+                            <!-- Mobile overlay updated for dark mode -->
+                            <div class="absolute inset-0 bg-brand-primary/10 backdrop-blur-sm flex items-center justify-center lg:hidden">
+                                <span class="text-brand-white/80 font-semibold p-4 rounded-lg bg-black/70">Video/Image Placeholder</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Core Pillars Highlight - Section background is dark gray for contrast with black hero -->
+        <section class="py-20 lg:py-32 bg-gray-950">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <!-- Title text is white -->
+                    <h2 class="text-3xl font-extrabold sm:text-4xl text-brand-white">
+                        The Four Pillars of Transformation
+                    </h2>
+                    <!-- Paragraph text is light gray -->
+                    <p class="mt-4 text-xl text-gray-400 max-w-3xl mx-auto">
+                        A structured approach to developing the complete individual for peak performance and career longevity.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                    <!-- Pillar Card 1: Mental Resilience - Card background is black -->
+                    <div class="bg-brand-black p-8 rounded-2xl shadow-xl shadow-brand-primary/10 hover:shadow-2xl transition duration-300 border-t-4 border-brand-primary">
+                        <div class="mb-4 inline-block p-3 rounded-full bg-brand-primary/20 text-brand-primary">
+                            <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-brand-white">Mental Resilience</h3>
+                        <p class="text-gray-400 text-sm">
+                            Master high-pressure situations, overcome fear of failure, and cultivate unwavering focus when it matters most.
+                        </p>
+                    </div>
+
+                    <!-- Pillar Card 2: Career Strategy - Card background is black -->
+                    <div class="bg-brand-black p-8 rounded-2xl shadow-xl shadow-brand-primary/10 hover:shadow-2xl transition duration-300 border-t-4 border-brand-primary">
+                        <div class="mb-4 inline-block p-3 rounded-full bg-brand-primary/20 text-brand-primary">
+                            <i data-lucide="trending-up" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-brand-white">Career Strategy</h3>
+                        <p class="text-gray-400 text-sm">
+                            Define your professional trajectory, secure endorsements, and build a lasting personal brand beyond the game.
+                        </p>
+                    </div>
+
+                    <!-- Pillar Card 3: Physical & Wellness - Card background is black -->
+                    <div class="bg-brand-black p-8 rounded-2xl shadow-xl shadow-brand-primary/10 hover:shadow-2xl transition duration-300 border-t-4 border-brand-primary">
+                        <div class="mb-4 inline-block p-3 rounded-full bg-brand-primary/20 text-brand-primary">
+                            <i data-lucide="dumbbell" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-brand-white">Physical & Wellness</h3>
+                        <p class="text-gray-400 text-sm">
+                            Integrate recovery science, nutrition best practices, and holistic health for peak physical condition and injury prevention.
+                        </p>
+                    </div>
+
+                    <!-- Pillar Card 4: Leadership Development - Card background is black -->
+                    <div class="bg-brand-black p-8 rounded-2xl shadow-xl shadow-brand-primary/10 hover:shadow-2xl transition duration-300 border-t-4 border-brand-primary">
+                        <div class="mb-4 inline-block p-3 rounded-full bg-brand-primary/20 text-brand-primary">
+                            <i data-lucide="users" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-brand-white">Leadership Development</h3>
+                        <p class="text-gray-400 text-sm">
+                            Become an influential leader in your team or organization by mastering communication, motivation, and accountability.
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Primary CTAs added after the Pillars (Duplicated for emphasis, same as Hero section) -->
+                <div class="mt-20 flex flex-col sm:flex-row justify-center gap-6">
+                    <!-- CTA 1: JOIN MENTORSHIP (Accent background, Black text) -->
+                    <a href="services.html#mentorship" class="cta-button flex items-center justify-center space-x-2 py-4 px-8 rounded-full bg-brand-primary text-brand-black font-extrabold text-lg hover:bg-opacity-90 transition shadow-xl shadow-brand-primary/30 w-full sm:w-auto">
+                        <i data-lucide="award" class="w-6 h-6"></i>
+                        <span>JOIN MENTORSHIP</span>
+                    </a>
+                    <!-- CTA 2: DOWNLOAD ELITE GUIDES (Transparent background, white border, white text) -->
+                    <a href="store.html" class="cta-button flex items-center justify-center space-x-2 py-4 px-8 rounded-full bg-transparent border border-brand-white text-brand-white font-extrabold text-lg hover:bg-brand-white/10 transition w-full sm:w-auto">
+                        <i data-lucide="book-open-text" class="w-6 h-6"></i>
+                        <span>DOWNLOAD ELITE GUIDES</span>
+                    </a>
+                </div>
+                <!-- END NEW CTAs -->
+
+            </div>
+        </section>
+
+        <!-- 3. Social Media CTA Section (Integration placeholder) - Background remains black, contrast adjusted -->
+        <section class="py-20 bg-brand-black text-brand-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-extrabold mb-4">
+                    Connect with the Community
+                </h2>
+                <p class="text-lg text-gray-400 mb-10">
+                    Join thousands of athletes, coaches, and parents transforming their approach to performance.
+                </p>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="whatsapp.html" class="flex items-center space-x-2 bg-green-500 text-white py-3 px-6 rounded-full font-bold hover:bg-green-600 transition cta-button shadow-lg">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        <span>Join the WhatsApp Hub</span>
+                    </a>
+                    <a href="#" class="flex items-center space-x-2 bg-brand-primary text-brand-black py-3 px-6 rounded-full font-bold hover:bg-brand-primary/90 transition cta-button shadow-lg">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                        <span>Follow on Instagram</span>
+                    </a>
+                    <!-- This CTA is now primary color on black background -->
+                    <a href="blog.html" class="flex items-center space-x-2 bg-brand-white text-brand-black py-3 px-6 rounded-full font-bold hover:bg-gray-200 transition cta-button shadow-lg">
+                        <i data-lucide="book-open" class="w-5 h-5"></i>
+                        <span>Read Latest Insights</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer - Background is dark gray, text is white/light gray -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Navigation -->
+                <div>
+                    <h4 class="font-bold mb-4 text-brand-white">Navigation</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="services.html" class="hover:text-brand-primary transition">Services</a></li>
+                        <li><a href="store.html" class="hover:text-brand-primary transition">Digital Store</a></li>
+                        <li><a href="workshops.html" class="hover:text-brand-primary transition">Workshops</a></li>
+                        <li><a href="blog.html" class="hover:text-brand-primary transition">Blog / Insights</a></li>
+                    </ul>
+                </div>
+                <!-- Support -->
+                <div>
+                    <h4 class="font-bold mb-4 text-brand-white">Support</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="contact.html" class="hover:text-brand-primary transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-brand-primary transition">FAQ</a></li>
+                        <li><a href="#" class="hover:text-brand-primary transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-primary transition">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Connect (Updated with Font Awesome Icons) -->
+                <div>
+                    <h4 class="font-bold mb-4 text-brand-white">Connect</h4>
+                    <!-- Social Icons using Font Awesome -->
+                    <div class="flex space-x-4 text-2xl">
+                        <!-- Instagram -->
+                        <a href="https://www.instagram.com/coachnathanpaulse" target="_blank" aria-label="Instagram" class="text-gray-400 hover:text-brand-primary transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <!-- TikTok -->
+                        <a href="https://www.tiktok.com/@coachnathanpaulse" target="_blank" aria-label="TikTok" class="text-gray-400 hover:text-brand-primary transition">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <!-- Facebook -->
+                        <a href="https://www.facebook.com/coachnathanpaulse" target="_blank" aria-label="Facebook" class="text-gray-400 hover:text-brand-primary transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <!-- LinkedIn -->
+                        <a href="https://www.linkedin.com/in/nathan-paulse-858513221/" target="_blank" aria-label="LinkedIn" class="text-gray-400 hover:text-brand-primary transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <!-- YouTube -->
+                        <a href="http://youtube.com/@coachnathanpaulse" target="_blank" aria-label="YouTube" class="text-gray-400 hover:text-brand-primary transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Newsletter Signup Placeholder -->
+                <div class="col-span-2 md:col-span-1">
+                    <h4 class="font-bold mb-4 text-brand-white">Stay Updated</h4>
+                    <p class="text-sm text-gray-400 mb-4">Get the latest mental performance tips delivered to your inbox.</p>
+                    <form class="flex space-x-2">
+                        <!-- Input field updated for dark mode contrast -->
+                        <input type="email" placeholder="Your Email" class="p-3 flex-grow rounded-lg border-gray-700 bg-gray-800 text-brand-white focus:border-brand-primary focus:ring-brand-primary" required>
+                        <button type="submit" class="p-3 rounded-lg bg-brand-primary text-brand-black font-semibold hover:bg-opacity-80 transition">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Consolidated Copyright and Developer Link -->
+            <div class="mt-10 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
+                &copy; <span id="current-year"></span> Coach Nathan Paulse. All rights reserved. 
+                <a href="https://webbytlotly.netlify.app/" target="_blank" class="text-gray-500 no-underline font-normal hover:text-gray-400 transition ml-1 whitespace-nowrap">
+                     Web Designs by Tlotly
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Get the current year for the footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle Logic
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+            mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // --- Slideshow logic (Mobile only) ---
+        function startSlideshow() {
+            const images = document.querySelectorAll('.slideshow-img');
+            if (images.length === 0) return;
+
+            let currentImageIndex = 0;
+            const intervalTime = 5000; // 5 seconds per slide
+
+            function nextSlide() {
+                // Ensure the current image is present before trying to hide it
+                if (images[currentImageIndex]) {
+                    images[currentImageIndex].classList.remove('active');
+                }
+                
+                // Calculate next index
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                
+                // Show next image
+                if (images[currentImageIndex]) {
+                    images[currentImageIndex].classList.add('active');
+                }
+            }
+
+            // Check if we are on a mobile size (less than 768px in Tailwind/standard md config)
+            if (window.innerWidth < 768) {
+                // Set initial active slide if not already set
+                if (!images[currentImageIndex].classList.contains('active')) {
+                    images[currentImageIndex].classList.add('active');
+                }
+                setInterval(nextSlide, intervalTime);
+            }
+        }
+
+        // Start the slideshow after the rest of the script runs
+        window.addEventListener('load', startSlideshow);
+    </script>
+</body>
+</html>
